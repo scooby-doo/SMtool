@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		 xmlns="http://java.sun.com/xml/ns/javaee" 
+		 xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
+		 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+
+		<listener>
+	        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	    </listener>
+		<!--  to change name or location of the default file - use this parameter
+		<context-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/applicationContext.xml</param-value>	
+		</context-param>
+		-->
+		<servlet>
+			<servlet-name>ViewRendererServlet</servlet-name>
+			<servlet-class>org.springframework.web.servlet.ViewRendererServlet</servlet-class>
+		</servlet>
+
+		<servlet-mapping>
+			<servlet-name>ViewRendererServlet</servlet-name>
+			<url-pattern>/WEB-INF/servlet/view</url-pattern>
+		</servlet-mapping>	
+
+		<jsp-config> 
+			<taglib> 
+				<taglib-uri>http://java.sun.com/portlet_2_0</taglib-uri>
+				<taglib-location>/WEB-INF/tld/liferay-portlet.tld</taglib-location>
+			</taglib> 
+		</jsp-config>
+</web-app>
