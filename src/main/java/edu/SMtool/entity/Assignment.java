@@ -11,15 +11,25 @@ import javax.persistence.Table;
 
 @Table(name = "Assigments")
 public class Assignment {
-	
-	private int idAssigment;
-	private Project idProject;
-	private Task idTask;
-	private Responsible idResp;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idAssigment")
+	private int idAssigment;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@Column(name  = "idProject")
+	private Project idProject;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@Column(name = "idTask")
+	private Task idTask;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@Column(name = "idResp")
+	private Responsible idResp;
+	
+	
 	public int getIdAssigment() {
 		return idAssigment;
 	}
@@ -27,8 +37,6 @@ public class Assignment {
 		this.idAssigment = idAssigment;
 	}
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@Column(name  = "idProject")
 	public Project getIdProject() {
 		return idProject;
 	}
@@ -36,8 +44,6 @@ public class Assignment {
 		this.idProject = idProject;
 	}
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@Column(name = "idTask")
 	public Task getIdTask() {
 		return idTask;
 	}
@@ -45,17 +51,11 @@ public class Assignment {
 		this.idTask = idTask;
 	}
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@Column(name = "idResp")
 	public Responsible getIdResp() {
 		return idResp;
 	}
 	public void setIdResp(Responsible idResp) {
 		this.idResp = idResp;
-	}
-	
-	
-	
-	
+	}	
 
 }
