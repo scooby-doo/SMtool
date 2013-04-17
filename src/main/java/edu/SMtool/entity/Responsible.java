@@ -9,16 +9,24 @@ import javax.persistence.Table;
 
 @Table(name = "Responsible")
 public class Responsible {
-	
-	private int id;
-	private String name;
-	private String surname;
-	private String email;
-	private String phone;
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idResp")
+	private int id;
+	
+	@Column(name = "name")
+	private String name;
+	
+	@Column(name = "surname")
+	private String surname;
+	
+	@Column(name = "email")
+	private String email;
+	
+	@Column(name = "phone")
+	private String phone;
+	
+
 	public int getId() {
 		return id;
 	}
@@ -26,7 +34,7 @@ public class Responsible {
 		this.id = id;
 	}
 	
-	@Column(name = "name")
+	
 	public String getName() {
 		return name;
 	}
@@ -34,7 +42,7 @@ public class Responsible {
 		this.name = name;
 	}
 	
-	@Column(name = "surname")
+	
 	public String getSurname() {
 		return surname;
 	}
@@ -42,7 +50,7 @@ public class Responsible {
 		this.surname = surname;
 	}
 	
-	@Column(name = "email")
+	
 	public String getEmail() {
 		return email;
 	}
@@ -50,7 +58,7 @@ public class Responsible {
 		this.email = email;
 	}
 	
-	@Column(name = "phone")
+	
 	public String getPhone() {
 		return phone;
 	}
