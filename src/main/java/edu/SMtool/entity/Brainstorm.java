@@ -10,15 +10,25 @@ import javax.persistence.Table;
 
 @Table(name="Brainstorm")
 public class Brainstorm {
-	private int id;
-	private String description;
-	private String comments;
-	private Date date;
-	private String status;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idAssigment")
+	private int id;
+
+	@Column(name="description")
+	private String description;
+	
+	@Column(name="comments")
+	private String comments;
+	
+	@Column(name="date")
+	private Date date;
+	
+	@Column(name="status")
+	private String status;
+	
+
 	public int getId() {
 		return id;
 	}
@@ -26,7 +36,6 @@ public class Brainstorm {
 		this.id = id;
 	}
 	
-	@Column(name="description")
 	public String getDescription() {
 		return description;
 	}
@@ -34,7 +43,6 @@ public class Brainstorm {
 		this.description = description;
 	}
 	
-	@Column(name="comments")
 	public String getComments() {
 		return comments;
 	}
@@ -42,7 +50,6 @@ public class Brainstorm {
 		this.comments = comments;
 	}
 	
-	@Column(name="date")
 	public Date getDate() {
 		return date;
 	}
@@ -50,7 +57,6 @@ public class Brainstorm {
 		this.date = date;
 	}
 	
-	@Column(name="status")
 	public String getStatus() {
 		return status;
 	}
