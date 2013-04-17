@@ -8,15 +8,21 @@ import javax.persistence.Table;
 
 @Table(name = "Goals")
 public class Goal {
-
-	private int id;
-	private String description;
-	private String status;
-	private String comments;
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column (name = "idGoal")
+	private int id;
+	
+	@Column(name = "descritpion")
+	private String description;
+	
+	@Column( name = "status")
+	private String status;
+	
+	@Column(name = "comments")
+	private String comments;
+	
+
 	public int getId() {
 		return id;
 	}
@@ -24,7 +30,7 @@ public class Goal {
 		this.id = id;
 	}
 	
-	@Column(name = "descritpion")
+	
 	public String getDescription() {
 		return description;
 	}
@@ -32,7 +38,7 @@ public class Goal {
 		this.description = description;
 	}
 	
-	@Column( name = "status")
+	
 	public String getStatus() {
 		return status;
 	}
@@ -40,7 +46,7 @@ public class Goal {
 		this.status = status;
 	}
 	
-	@Column(name = "comments")
+	
 	public String getComments() {
 		return comments;
 	}
