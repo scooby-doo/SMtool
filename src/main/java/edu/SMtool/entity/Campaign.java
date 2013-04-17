@@ -10,13 +10,18 @@ import javax.persistence.Table;
 
 @Table(name="Campaign")
 public class Campaign {
-	private int id;
-	private Date startDate;
-	private Date endDate;
-	
+		
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
+	private int id;
+	
+	@Column(name = "startDate")
+	private Date startDate;
+	
+	@Column(name = "endDate")
+	private Date endDate;
+
 	public int getId() {
 		return id;
 	}
@@ -24,7 +29,6 @@ public class Campaign {
 		this.id = id;
 	}
 	
-	@Column(name = "startDate")
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -32,14 +36,10 @@ public class Campaign {
 		this.startDate = startDate;
 	}
 	
-	@Column(name = "endDate")
 	public Date getEndDate() {
 		return endDate;
 	}
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	
-	
-
 }
