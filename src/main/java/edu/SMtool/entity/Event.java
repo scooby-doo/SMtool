@@ -12,18 +12,32 @@ import javax.persistence.Table;
 
 @Table(name = "Events")
 public class Event {
-	private int id;
-	private Date startDate;
-	private Date endDate;
-	private String location;
-	private String name;
-	private String description;
-	private Campaign idCampaign;
-	
-	
+		
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idEvent")
+	private int id;
+	
+	@Column(name = "starDate")
+	private Date startDate;
+	
+	@Column(name = "endDate")
+	private Date endDate;
+	
+	@Column(name="location")
+	private String location;
+	
+	@Column(name = "name")
+	private String name;
+	
+	@Column(name = "descritpion")
+	private String description;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@Column(name = "idCampaign")	
+	private Campaign idCampaign;
+	
+
 	public int getId() {
 		return id;
 	}
@@ -31,7 +45,7 @@ public class Event {
 		this.id = id;
 	}
 	
-	@Column(name = "starDate")
+	
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -39,7 +53,7 @@ public class Event {
 		this.startDate = startDate;
 	}
 	
-	@Column(name = "endDate")
+	
 	public Date getEndDate() {
 		return endDate;
 	}
@@ -47,7 +61,7 @@ public class Event {
 		this.endDate = endDate;
 	}
 	
-	@Column(name="location")
+	
 	public String getLocation() {
 		return location;
 	}
@@ -55,7 +69,7 @@ public class Event {
 		this.location = location;
 	}
 	
-	@Column(name = "name")
+	
 	public String getName() {
 		return name;
 	}
@@ -63,7 +77,7 @@ public class Event {
 		this.name = name;
 	}
 	
-	@Column(name = "descritpion")
+	
 	public String getDescription() {
 		return description;
 	}
@@ -71,8 +85,7 @@ public class Event {
 		this.description = description;
 	}
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@Column(name = "idCampaign")
+
 	public Campaign getIdCampaign() {
 		return idCampaign;
 	}
