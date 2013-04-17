@@ -13,16 +13,25 @@ import javax.persistence.Table;
 
 @Table(name = "Post")
 public class Post {
-	
-	private int id;
-	private Date date;
-	private String content;
-	private String link;
-	private Campaign idCampaign;
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idPost")
+	private int id;
+
+	@Column(name = "date")
+	private Date date;
+	
+	@Column (name = "content")
+	private String content;
+	
+	@Column(name = "link")
+	private String link;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@Column(name = "idCampaign")
+	private Campaign idCampaign;
+	
+
 	public int getId() {
 		return id;
 	}
@@ -30,7 +39,7 @@ public class Post {
 		this.id = id;
 	}
 	
-	@Column(name = "date")
+	
 	public Date getDate() {
 		return date;
 	}
@@ -38,7 +47,7 @@ public class Post {
 		this.date = date;
 	}
 	
-	@Column (name = "content")
+
 	public String getContent() {
 		return content;
 	}
@@ -46,7 +55,7 @@ public class Post {
 		this.content = content;
 	}
 	
-	@Column(name = "link")
+	
 	public String getLink() {
 		return link;
 	}
@@ -54,8 +63,7 @@ public class Post {
 		this.link = link;
 	}
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@Column(name = "idCampaign")
+
 	public Campaign getIdCampaign() {
 		return idCampaign;
 	}
