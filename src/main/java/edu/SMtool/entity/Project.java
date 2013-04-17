@@ -11,16 +11,25 @@ import javax.persistence.Table;
 
 @Table(name = "Projects")
 public class Project {
-
-	private int id;
-	private String name;
-	private String description;
-	private Campaign idCampaign;
-	private String comments;
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idProjects")
+	private int id;
+	
+	@Column(name = "name")
+	private String name;
+	
+	@Column(name = "description")
+	private String description;
+
+	@OneToOne(fetch = FetchType.LAZY)
+	@Column(name = "idCampaign")
+	private Campaign idCampaign;
+	
+	@Column(name = "comments")
+	private String comments;
+	
+
 	public int getId() {
 		return id;
 	}
@@ -28,7 +37,7 @@ public class Project {
 		this.id = id;
 	}
 	
-	@Column(name = "name")
+	
 	public String getName() {
 		return name;
 	}
@@ -36,7 +45,7 @@ public class Project {
 		this.name = name;
 	}
 	
-	@Column(name = "description")
+	
 	public String getDescription() {
 		return description;
 	}
@@ -44,8 +53,7 @@ public class Project {
 		this.description = description;
 	}
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@Column(name = "idCampaign")
+
 	public Campaign getIdCampaign() {
 		return idCampaign;
 	}
@@ -53,7 +61,7 @@ public class Project {
 		this.idCampaign = idCampaign;
 	}
 	
-	@Column(name = "comments")
+	
 	public String getComments() {
 		return comments;
 	}
