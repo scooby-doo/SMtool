@@ -9,18 +9,30 @@ import javax.persistence.Table;
 
 @Table(name = "Users")
 public class User {
-	
-	private int id;
-	private String firstName;
-	private String lastName;
-	private String userName;
-	private String password;
-	private String email;
-	private String birthday;
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name  = "idUser")
+	private int id;
+	
+	@Column(name = "firstName")
+	private String firstName;
+	
+	@Column(name = "lastName")
+	private String lastName;
+	
+	@Column(name = "userName")
+	private String userName;
+	
+	@Column(name = "password")
+	private String password;
+	
+	@Column(name = "email")
+	private String email;
+	
+	@Column(name = "birthday")
+	private String birthday;
+	
+
 	public int getId() {
 		return id;
 	}
@@ -28,7 +40,7 @@ public class User {
 		this.id = id;
 	}
 	
-	@Column(name = "firstName")
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -36,7 +48,7 @@ public class User {
 		this.firstName = firstName;
 	}
 	
-	@Column(name = "lastName")
+	
 	public String getLastName() {
 		return lastName;
 	}
@@ -44,7 +56,7 @@ public class User {
 		this.lastName = lastName;
 	}
 	
-	@Column(name = "userName")
+	
 	public String getUserName() {
 		return userName;
 	}
@@ -52,7 +64,7 @@ public class User {
 		this.userName = userName;
 	}
 	
-	@Column(name = "password")
+	
 	public String getPassword() {
 		return password;
 	}
@@ -60,7 +72,7 @@ public class User {
 		this.password = password;
 	}
 	
-	@Column(name = "email")
+	
 	public String getEmail() {
 		return email;
 	}
@@ -68,7 +80,7 @@ public class User {
 		this.email = email;
 	}
 	
-	@Column(name = "birthday")
+	
 	public String getBirthday() {
 		return birthday;
 	}
