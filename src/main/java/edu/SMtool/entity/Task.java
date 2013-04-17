@@ -11,16 +11,24 @@ import javax.persistence.Table;
 
 @Table(name = "Task")
 public class Task {
-	
-	private int id;
-	private String name;
-	private String description;
-	private Date startDate;
-	private Date deadLine;
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idTask")
+	private int id;
+	
+	@Column(name = "name")	
+	private String name;
+	
+	@Column(name = "description")
+	private String description;
+	
+	@Column(name = "startDate")
+	private Date startDate;
+	
+	@Column(name = "dl")
+	private Date deadLine;
+	
+
 	public int getId() {
 		return id;
 	}
@@ -28,7 +36,7 @@ public class Task {
 		this.id = id;
 	}
 	
-	@Column(name = "name")
+
 	public String getName() {
 		return name;
 	}
@@ -36,7 +44,7 @@ public class Task {
 		this.name = name;
 	}
 	
-	@Column(name = "description")
+	
 	public String getDescription() {
 		return description;
 	}
@@ -44,7 +52,7 @@ public class Task {
 		this.description = description;
 	}
 	
-	@Column(name = "startDate")
+	
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -52,7 +60,7 @@ public class Task {
 		this.startDate = startDate;
 	}
 	
-	@Column(name = "dl")
+	
 	public Date getDeadLine() {
 		return deadLine;
 	}
