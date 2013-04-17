@@ -9,13 +9,18 @@ import javax.persistence.Table;
 
 @Table(name = "Category")
 public class Category {
-	private int id;
-	private String name;
-	private String descritpion;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idCategory")
+	private int id;
+
+	@Column(name = "name")
+	private String name;
+
+	@Column(name = "description")
+	private String descritpion;
+
 	public int getId() {
 		return id;
 	}
@@ -23,7 +28,7 @@ public class Category {
 		this.id = id;
 	}
 	
-	@Column(name = "name")
+	
 	public String getName() {
 		return name;
 	}
@@ -31,7 +36,7 @@ public class Category {
 		this.name = name;
 	}
 	
-	@Column(name = "description")
+	
 	public String getDescritpion() {
 		return descritpion;
 	}
