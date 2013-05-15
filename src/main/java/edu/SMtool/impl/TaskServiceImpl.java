@@ -2,39 +2,44 @@ package edu.SMtool.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import edu.SMtool.entity.Task;
 import edu.SMtool.interfaces.TaskService;
+import edu.SMtool.interfaces.dao.TaskDAO;
 
+@Service("taskService")
 public class TaskServiceImpl implements TaskService {
 
-	@Override
-	public void addTask() {
-		// TODO Auto-generated method stub
+	private static final long serialVersionUID = -5246849046905030117L;
+	
+	@Autowired
+	TaskDAO taskDAO;
 
+	@Override
+	public void addTask(Task task) {
+		taskDAO.addTask(task);
 	}
 
 	@Override
-	public void deleteTask() {
-		// TODO Auto-generated method stub
-
+	public void deleteTask(Task task) {
+		taskDAO.deleteTask(task);
 	}
 
 	@Override
 	public void editTask(Task task) {
-		// TODO Auto-generated method stub
-
+		taskDAO.editTask(task);
 	}
 
 	@Override
 	public Task getTaskById(int idTask) {
-		// TODO Auto-generated method stub
-		return null;
+		return taskDAO.getTaskById(idTask);
 	}
 
 	@Override
 	public List<Task> getAllTasks() {
-		// TODO Auto-generated method stub
-		return null;
+		return taskDAO.getAllTasks();
 	}
 
 }

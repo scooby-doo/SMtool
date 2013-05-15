@@ -1,20 +1,26 @@
 package edu.SMtool.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
+@Entity
 @Table(name = "Responsible")
-public class Responsible {
+public class Responsible implements Serializable {
+
+	private static final long serialVersionUID = 7464121378177636875L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idResp")
 	private int id;
 	
-	@Column(name = "name")
+	@Column(name = "nname")
 	private String name;
 	
 	@Column(name = "surname")

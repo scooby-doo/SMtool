@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!-- <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:context="http://www.springframework.org/schema/context"
@@ -24,15 +24,33 @@
 	<context:component-scan base-package="edu.SMtool.entity" />
 	<context:component-scan base-package="edu.SMtool.impl" />
 	<context:component-scan base-package="edu.SMtool.service" />
+	<context:component-scan base-package="edu.SMtool.controller" />
 
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
 			<value>/WEB-INF/view/</value>
 		</property>
 		<property name="suffix">
-			<value>.jsp</value>
+			<value>.jsf</value>
 		</property>
 	</bean>
+	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
+	
+	  Bind to a naming convention for controllers and views
+  <bean id="classnameControllerMappings" class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
+  </bean>
+
+  Enables annotated POJO @Controllers
+  <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
+	 
+	<bean id="goalController" class="edu.SMtool.controller.GoalController"></bean>
+	<bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">  
+        <property name="mappings">  
+            <props>  
+                <prop key="/">goalController</prop>   
+            </props>  
+        </property>  
+    </bean>
 
 	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource" >
 		<property name="basename" value="classpath:messages" />
@@ -77,4 +95,4 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
-</beans>
+</beans> -->

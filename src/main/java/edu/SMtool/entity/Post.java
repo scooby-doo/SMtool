@@ -1,34 +1,40 @@
 package edu.SMtool.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
+@Entity
 @Table(name = "Post")
-public class Post {
+public class Post implements Serializable{
+
+	private static final long serialVersionUID = -1804408044639078030L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idPost")
 	private int id;
 
-	@Column(name = "date")
+	@Column(name = "ddate")
 	private Date date;
 	
-	@Column (name = "content")
+	@Column (name = "ccontent")
 	private String content;
 	
 	@Column(name = "link")
 	private String link;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@Column(name = "idCampaign")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "idCampaign")
 	private Campaign idCampaign;
 	
 

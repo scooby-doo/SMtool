@@ -1,22 +1,27 @@
 package edu.SMtool.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
+@Entity
 @Table(name = "Task")
-public class Task {
+public class Task implements Serializable {
+
+	private static final long serialVersionUID = -5841898209655834784L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idTask")
 	private int id;
 	
-	@Column(name = "name")	
+	@Column(name = "nname")	
 	private String name;
 	
 	@Column(name = "description")

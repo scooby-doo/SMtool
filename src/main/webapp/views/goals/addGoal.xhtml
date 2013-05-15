@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:ui="http://java.sun.com/jsf/facelets"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/> 
+<title>Insert title here</title>
+</h:head>
+<h:body>
+	<h:form>  
+              
+    <p:panel id="panel" header="Add Goal">  
+      
+        <p:focus context="panel"/>  
+          
+        <p:messages />  
+          
+        <h:panelGrid columns="3" >  
+            <h:outputLabel for="description" value="Description: *" />  
+            <p:inputText id="name" required="true" label="Description"  
+                    value="#{goalBean.goal.description}" >   
+            </p:inputText>  
+            <p:message for="name" />  
+              
+            <h:outputLabel for="status" value="Status: *" />  
+            <p:inputText id="status" required="true" label="Status"  
+                    value="#{goalBean.goal.status}" />  
+            <p:message for="status" />
+            
+            <h:outputLabel for="comments" value="Comments: *" />  
+            <p:inputTextarea id="comments" required="true" label="Status"  
+                    value="#{goalBean.goal.comments}" />  
+            <p:message for="comments" />   
+        </h:panelGrid>  
+          
+        <p:commandButton value="Submit" update="panel"  action="#{goalBean.addGoal}" >
+        </p:commandButton>  
+    </p:panel>  
+</h:form>
+</h:body>
+</html>

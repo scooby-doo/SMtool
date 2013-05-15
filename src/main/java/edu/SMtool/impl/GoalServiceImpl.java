@@ -2,58 +2,47 @@ package edu.SMtool.impl;
 
 import java.util.List;
 
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import edu.SMtool.entity.Goal;
 import edu.SMtool.interfaces.GoalService;
+import edu.SMtool.interfaces.dao.GoalDAO;
 
+@Service("goalService")
 public class GoalServiceImpl implements GoalService {
+
+	private static final long serialVersionUID = -9100154238316194355L;
+	
 	@Autowired
-	private SessionFactory sessionFactory;
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
+	private GoalDAO goalDAO;
+	
 	@Override
-	public void addGoal() {
-		// TODO Auto-generated method stub
-
+	public void addGoal(Goal goal) {
+		goalDAO.addGoal(goal);
 	}
 
 	@Override
-	public void deleteGoal() {
-		// TODO Auto-generated method stub
+	public void deleteGoal(Goal goal) {
+		goalDAO.deleteGoal(goal);
 
 	}
 
 	@Override
 	public void editGoal(Goal goal) {
-		// TODO Auto-generated method stub
+		goalDAO.editGoal(goal);
 
 	}
 
 	@Override
 	public Goal getGoalById(int idGoal) {
-		// TODO Auto-generated method stub
-		return null;
+		return goalDAO.getGoalById(idGoal);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Goal> getAllGoals() {
-		System.out.println("sessionFactory is");
-		System.out.println(sessionFactory);
-		List<Goal> listGoals = sessionFactory.getCurrentSession().createQuery("from Goal").list();
-		for(Goal goals : listGoals) {
-			System.out.println(goals.getDescription());
-		}
+		List<Goal> listGoals = goalDAO.getAllGoals();
 		return listGoals;
 	}
-	
-	/*public static void main(String[] args){
-		GoalServiceImpl goalService = new GoalServiceImpl();
-		goalService.getAllGoals();
-	}*/
 
 }

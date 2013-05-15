@@ -1,32 +1,39 @@
 package edu.SMtool.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+@Entity
+@Table(name = "Project")
+public class Project implements Serializable {
 
-@Table(name = "Projects")
-public class Project {
+	private static final long serialVersionUID = -2841183497215891175L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idProjects")
+	@Column(name = "idProject")
 	private int id;
 	
-	@Column(name = "name")
+	@Column(name = "nname")
 	private String name;
 	
 	@Column(name = "description")
 	private String description;
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@Column(name = "idCampaign")
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "idCampaign")
 	private Campaign idCampaign;
 	
-	@Column(name = "comments")
+	@Column(name = "coments")
 	private String comments;
 	
 

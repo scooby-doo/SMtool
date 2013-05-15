@@ -1,4 +1,4 @@
-package edu.SMtool.controller;
+/**package edu.SMtool.controller;
 
 import java.util.Map;
 
@@ -9,18 +9,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import edu.SMtool.entity.Goal;
 import edu.SMtool.interfaces.GoalService;
 
-@Controller
-@RequestMapping("index")
+@Controller("goalController")
+@RequestMapping("/")
 public class GoalController {
 	
 	@Autowired
 	private GoalService goalService;
 	
-	@RequestMapping("/list")
+	@RequestMapping("/")
 	public String listGoals(Map<String, Object> map){
+		System.out.println("in controller: lsit goals");
 		map.put("goal", new Goal());
 		map.put("goalList",goalService.getAllGoals());
 		return "viewGoals";
 	}
 
 }
+*/

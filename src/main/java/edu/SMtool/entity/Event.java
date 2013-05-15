@@ -1,40 +1,46 @@
 package edu.SMtool.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-@Table(name = "Events")
-public class Event {
-		
+@Entity
+@Table(name = "Event")
+public class Event implements Serializable{
+
+	private static final long serialVersionUID = -6669223045754968335L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idEvent")
 	private int id;
 	
-	@Column(name = "starDate")
+	@Column(name = "startDate")
 	private Date startDate;
 	
 	@Column(name = "endDate")
 	private Date endDate;
 	
-	@Column(name="location")
+	@Column(name="llocation")
 	private String location;
 	
-	@Column(name = "name")
+	@Column(name = "nname")
 	private String name;
 	
-	@Column(name = "descritpion")
+	@Column(name = "description")
 	private String description;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@Column(name = "idCampaign")	
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "idCampaign")	
 	private Campaign idCampaign;
 	
 

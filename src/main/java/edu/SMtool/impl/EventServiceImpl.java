@@ -2,39 +2,44 @@ package edu.SMtool.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import edu.SMtool.entity.Event;
 import edu.SMtool.interfaces.EventService;
+import edu.SMtool.interfaces.dao.EventDAO;
 
+@Service("eventService")
 public class EventServiceImpl implements EventService {
 
-	@Override
-	public void addEvent() {
-		// TODO Auto-generated method stub
+	private static final long serialVersionUID = 4493606534679326940L;
+	
+	@Autowired
+	EventDAO eventDAO;
 
+	@Override
+	public void addEvent(Event event) {
+		eventDAO.addEvent(event);
 	}
 
 	@Override
-	public void deleteEvent() {
-		// TODO Auto-generated method stub
-
+	public void deleteEvent(Event event) {
+		eventDAO.deleteEvent(event);
 	}
 
 	@Override
 	public void editEvent(Event event) {
-		// TODO Auto-generated method stub
-
+		eventDAO.editEvent(event);
 	}
 
 	@Override
 	public Event getEventById(int idEvent) {
-		// TODO Auto-generated method stub
-		return null;
+		return eventDAO.getEventById(idEvent);
 	}
 
 	@Override
 	public List<Event> getAllEvents() {
-		// TODO Auto-generated method stub
-		return null;
+		return eventDAO.getAllEvents();
 	}
 
 }

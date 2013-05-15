@@ -2,39 +2,44 @@ package edu.SMtool.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import edu.SMtool.entity.Campaign;
 import edu.SMtool.interfaces.CampaignService;
+import edu.SMtool.interfaces.dao.CampaignDAO;
 
+@Service("campaignService")
 public class CampaignServiceImpl implements CampaignService {
 
-	@Override
-	public void addCampaign() {
-		// TODO Auto-generated method stub
+	private static final long serialVersionUID = 8077335953169920475L;
+	
+	@Autowired
+	CampaignDAO campaignDAO;
 
+	@Override
+	public void addCampaign(Campaign campaign) {
+		campaignDAO.addCampaign(campaign);
 	}
 
 	@Override
-	public void deleteCampaign() {
-		// TODO Auto-generated method stub
-
+	public void deleteCampaign(Campaign campaign) {
+		campaignDAO.deleteCampaign(campaign);
 	}
 
 	@Override
 	public void editCampaign(Campaign campaign) {
-		// TODO Auto-generated method stub
-
+		campaignDAO.editCampaign(campaign);
 	}
 
 	@Override
 	public Campaign getCampaignById(int idCampaign) {
-		// TODO Auto-generated method stub
-		return null;
+		return campaignDAO.getCampaignById(idCampaign);
 	}
 
 	@Override
 	public List<Campaign> getAllCampaigns() {
-		// TODO Auto-generated method stub
-		return null;
+		return campaignDAO.getAllCampaigns();
 	}
 
 }

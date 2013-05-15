@@ -1,17 +1,23 @@
 package edu.SMtool.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+@Entity
+@Table(name = "Resource")
+public class Resource implements Serializable {
 
-@Table(name = "Resources")
-public class Resource {
-	
+	private static final long serialVersionUID = 2871467860308064732L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idResource")	
@@ -23,11 +29,11 @@ public class Resource {
 	@Column(name = "link")
 	private String link;
 	
-	@Column(name = "comments")
+	@Column(name = "coments")
 	private String comments;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@Column(name = "idCategory")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "idCategory")
 	private Category idCategory;
 
 	public int getId() {

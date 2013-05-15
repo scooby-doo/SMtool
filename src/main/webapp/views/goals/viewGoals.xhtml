@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:ui="http://java.sun.com/jsf/facelets"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/> 
+<title>Insert title here</title>
+</h:head>
+<h:body>
+	<h:form id="form"> 
+		<p:growl id="messages" showDetail="true"/>   
+	
+		<p:dataTable var="goal" value="#{goalBean.goalList}"  id="goalList" editable="true"
+	                 paginator="true" rows="10"  
+	                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+	                 rowsPerPageTemplate="5,10,15" >  
+	      <p:ajax event="rowEdit" listener="#{goalBean.onEdit}" update=":form:messages" />
+	  	  <p:ajax event="rowEditCancel" listener="#{goalBean.onCancel}" update=":form:messages"/>
+	      
+	        <f:facet name="header">  
+	            Goals 
+	        </f:facet>  
+ 
+	        <p:column headerText="Description" style="width:32%">  
+	            <p:cellEditor>  
+	            	<f:facet name="output">
+	            		<h:outputText value="#{goal.description}"/>
+	            	</f:facet>
+	            	<f:facet name="input">
+	            		<p:inputText value="#{goal.description}" style="width:100%"/>
+	            	</f:facet>
+	            </p:cellEditor> 
+	        </p:column>  
+	  
+	        <p:column headerText="Status" style="width:32%"> 
+	        	<p:cellEditor> 
+		        	<f:facet name="output">
+		        		<h:outputText value="#{goal.status}" />
+		        	</f:facet>
+		        	<f:facet name="input">
+		        		<p:inputText value="#{goal.status}" style="width:100%"/>
+		        	</f:facet>
+		        </p:cellEditor>
+	        </p:column>
+	        
+	        <p:column headerText="Comments" style="width:31%"> 
+	        	<p:cellEditor> 
+		            <f:facet name="output">
+		            	<h:outputText value="#{goal.comments}" />
+		            </f:facet>
+		        	<f:facet name="input">
+		        		<p:inputText value="#{goal.comments}" style="width:100%"/>
+		        	</f:facet>
+	        	</p:cellEditor>
+	        </p:column> 
+	       
+	        <p:column style="width:5%">  
+           		 <p:rowEditor />  
+           		 <p:commandButton icon="ui-icon-close" title="remove goal" actionListener="#{goalBean.removeGoal(goal)}" update="goalList" />
+        	</p:column> 
+  
+	    </p:dataTable> 
+		<p:commandButton value="Add" update="goalList" action="#{goalBean.addNewGoal()}" process="@this" /> 
+         
+   </h:form>
+</h:body>
+</html>

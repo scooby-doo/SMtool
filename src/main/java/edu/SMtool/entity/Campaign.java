@@ -1,20 +1,31 @@
 package edu.SMtool.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+@Entity
 @Table(name="Campaign")
-public class Campaign {
-		
+public class Campaign implements Serializable {
+
+	private static final long serialVersionUID = 691576765189803937L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "idCampaign")
 	private int id;
+	
+	@Column(name = "nname")
+	private String name;
+	
+	@Column(name = "description")
+	private String description;
 	
 	@Column(name = "startDate")
 	private Date startDate;
@@ -42,4 +53,18 @@ public class Campaign {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	
 }

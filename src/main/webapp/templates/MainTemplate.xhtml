@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:utils="http://java.sun.com/jsf/composite/utils"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<ui:param name="root" value="#{request.contextPath}" />
+	<link rel="stylesheet" type="text/css" href="#{root}/css/style.css" />
+</h:head>
+
+<h:body>
+		<div>
+			<div id="header">
+				<ui:insert name="header">
+				</ui:insert>
+			</div>
+			<div id="breadCrumb">
+				<p:breadCrumb>
+					<p:menuitem value="Home" url="#" />
+				</p:breadCrumb>
+			</div>
+			<div class="container">
+				<div id="left">
+					<div>
+						<div class="space"></div>
+						<h:form>
+						<p:menu>
+							<p:submenu label="SMtool">
+								<p:menuitem value="Assignments"
+									url="/views/assignment/assignmentHome.jsf" />
+								<p:menuitem value="Brainstorms"
+									url="/views/brainstorm/brainstormHome.jsf" />
+								<p:menuitem value="Campaigns"
+									url="/views/campaign/campaignHome.jsf" />
+								<p:menuitem value="Categories"
+									url="/views/category/categoryHome.jsf" />
+								<p:menuitem value="Events"
+									url="/views/event/eventHome.jsf" />
+								<p:menuitem value="Goals"
+									url="/views/goals/goalHome.jsf" />
+								<p:menuitem value="Posts"
+									url="/views/post/postHome.jsf" />
+								<p:menuitem value="Projects"
+									url="/views/project/projectHome.jsf" />
+								<p:menuitem value="Resources"
+									url="/views/resource/resourceHome.jsf" />
+								<p:menuitem value="Responsibles"
+									url="/views/responsible/responsibleHome.jsf" />
+								<p:menuitem value="Tasks"
+									url="/views/task/taskHome.jsf" />
+								<p:menuitem value="Users"
+									url="/views/user/userHome.jsf" />
+							</p:submenu>
+						</p:menu>
+						</h:form>
+					</div>
+				</div>
+				<div class="space"></div>
+				<div id="center">
+					<ui:insert name="center"></ui:insert>
+				</div>
+			</div>
+			<div id="footer">
+				<ui:insert name="footer">
+ 						&copy; SMTool, Scooby, 2013. &nbsp; &nbsp;
+    				</ui:insert>
+			</div>
+			<ui:remove>
+				<!-- Orice veti adauga la template,
+					lasati scriptul la sfirsit de pagina cuprins in tagul body -->
+			</ui:remove>
+
+			<script type="text/javascript">
+				
+			</script>
+		</div>
+</h:body>
+</html>

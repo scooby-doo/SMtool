@@ -1,28 +1,33 @@
 package edu.SMtool.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+@Entity
 @Table(name="Brainstorm")
-public class Brainstorm {
+public class Brainstorm implements Serializable {
+
+	private static final long serialVersionUID = -2768489942798635923L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idAssigment")
+	@Column(name="idBrainstorm")
 	private int id;
 
 	@Column(name="description")
 	private String description;
 	
-	@Column(name="comments")
+	@Column(name="coments")
 	private String comments;
 	
-	@Column(name="date")
+	@Column(name="ddate")
 	private Date date;
 	
 	@Column(name="status")

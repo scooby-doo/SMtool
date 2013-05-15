@@ -2,39 +2,47 @@ package edu.SMtool.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import edu.SMtool.entity.Brainstorm;
 import edu.SMtool.interfaces.BrainstormService;
+import edu.SMtool.interfaces.dao.BrainstormDAO;
 
+@Service("brainstormService")
 public class BrainstormServiceImpl implements BrainstormService {
 
+	private static final long serialVersionUID = 888356187279953020L;
+
+	@Autowired
+	BrainstormDAO brainstormDAO;
+	
 	@Override
-	public void addBrainstorm() {
-		// TODO Auto-generated method stub
+	public void addBrainstorm(Brainstorm brainstorm) {
+		brainstormDAO.addBrainstorm(brainstorm);
 
 	}
 
 	@Override
-	public void deleteBrainstorm() {
-		// TODO Auto-generated method stub
+	public void deleteBrainstorm(Brainstorm brainstorm) {
+		brainstormDAO.deleteBrainstorm(brainstorm);
 
 	}
 
 	@Override
 	public void editBrainstorm(Brainstorm brainstorm) {
-		// TODO Auto-generated method stub
+		brainstormDAO.editBrainstorm(brainstorm);
 
 	}
 
 	@Override
 	public Brainstorm getBrainstormById(int idBrainstorm) {
-		// TODO Auto-generated method stub
-		return null;
+		return brainstormDAO.getBrainstormById(idBrainstorm);
 	}
 
 	@Override
 	public List<Brainstorm> getAllBrainstorms() {
-		// TODO Auto-generated method stub
-		return null;
+		return brainstormDAO.getAllBrainstorms();
 	}
 
 }
