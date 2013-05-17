@@ -10,6 +10,7 @@ public interface ResponsibleDAO extends Serializable {
 	public void deleteResponsible(Responsible responsible);
 	public void editResponsible(Responsible responsible);
 	public Responsible getResponsibleById(int idResponsible);
+	public Responsible getDefaultResponsible();
 	public List<Responsible> getAllResponsibles();
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.SMtool.entity.Project;
 import edu.SMtool.interfaces.ProjectService;
@@ -16,6 +17,12 @@ public class ProjectServiceImpl implements ProjectService {
 	
 	@Autowired
 	ProjectDAO projectDAO;
+	
+	@Override
+	@Transactional
+	public Project getDefaultProject(){
+		return projectDAO.getDefaultProject();
+	}
 	
 	@Override
 	public void addProject(Project project) {

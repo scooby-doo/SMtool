@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import edu.SMtool.entity.Category;
-import edu.SMtool.interfaces.CategorySerice;
+import edu.SMtool.interfaces.CategoryService;
 
 @Component
 public class CategoryBean implements Serializable {
@@ -19,26 +19,26 @@ public class CategoryBean implements Serializable {
 	private List<Category> categoryList;
 	
 	@Autowired
-	private CategorySerice categorySerice;
+	private CategoryService categoryService;
 	
 	@PostConstruct
 	public void init(){
-		categoryList = categorySerice.getAllCategories();
+		categoryList = categoryService.getAllCategories();
 	}
 	
 	public void onEdit(RowEditEvent event){
 		Category newValue = (Category) event.getObject();
-		categorySerice.editCategory(newValue);
+		categoryService.editCategory(newValue);
 	}
 	
 	public void addNewCategory(){
 		Category newCategory = new Category();
-		categorySerice.addCategory(newCategory);
+		categoryService.addCategory(newCategory);
 		categoryList.add(newCategory);
 	}
 	
 	public void removeCategory(Category category){
-		categorySerice.deleteCategory(category);
+		categoryService.deleteCategory(category);
 		categoryList.remove(category);
 	}
 

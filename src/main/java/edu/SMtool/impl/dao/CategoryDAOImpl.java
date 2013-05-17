@@ -24,6 +24,12 @@ public class CategoryDAOImpl implements CategoryDAO {
 
 	@Override
 	@Transactional
+	public Category getDefaultCategory(){
+		return getCategoryById(1);
+	}
+	
+	@Override
+	@Transactional
 	public void addCategory(Category category) {
 		sessionFactory.getCurrentSession().saveOrUpdate(category);
 	}

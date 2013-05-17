@@ -21,6 +21,12 @@ public class CampaignDAOImpl implements CampaignDAO {
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
+	
+	@Override
+	@Transactional
+	public Campaign getDefaultCampaign(){
+		return getCampaignById(1);
+	}
 
 	@Override
 	@Transactional

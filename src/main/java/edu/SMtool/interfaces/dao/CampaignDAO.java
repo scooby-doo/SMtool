@@ -6,7 +6,7 @@ import java.util.List;
 import edu.SMtool.entity.Campaign;
 
 public interface CampaignDAO extends Serializable {
-	
+	public Campaign getDefaultCampaign();
 	public void addCampaign(Campaign campaign);
 	public void deleteCampaign(Campaign campaign);
 	public void editCampaign(Campaign campaign);

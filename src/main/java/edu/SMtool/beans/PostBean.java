@@ -19,11 +19,13 @@ public class PostBean implements Serializable {
 	private List<Post> postList;
 	
 	@Autowired
-	PostService postService;
+	private PostService postService;
+	
+	@Autowired
+	private ServiceUtils serviceUtils;
 	
 	@PostConstruct
 	public void init(){
-		System.out.println("in Post init");
 		postList = postService.getAllPosts();
 	}
 	
@@ -34,6 +36,7 @@ public class PostBean implements Serializable {
 	
 	public void addNewPost(){
 		Post newPost = new Post();
+		newPost.setIdCampaign(serviceUtils.getDefaultCampaign());
 		postService.addPost(newPost);
 		postList.add(newPost);
 	}

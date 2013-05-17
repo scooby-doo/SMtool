@@ -21,6 +21,9 @@ public class AssignmentBean implements Serializable {
 	@Autowired
 	private AssignmentService assignmentService;
 	
+	@Autowired
+	private ServiceUtils serviceUtils;
+	
 	@PostConstruct
 	public void init(){
 		assignmentList = assignmentService.getAllAssignments();
@@ -33,6 +36,9 @@ public class AssignmentBean implements Serializable {
 	
 	public void addNewAssignment(){
 		Assignment newAssignment = new Assignment();
+		newAssignment.setIdResp(serviceUtils.getDefaultResponsible());
+		newAssignment.setIdTask(serviceUtils.getDefaultTask());
+		newAssignment.setIdProject(serviceUtils.getDefaultProject());
 		assignmentService.addAssignment(newAssignment);
 		assignmentList.add(newAssignment);
 	}

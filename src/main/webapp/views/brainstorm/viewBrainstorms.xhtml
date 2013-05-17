@@ -15,7 +15,7 @@
 	                 paginator="true" rows="10"  
 	                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
 	                 rowsPerPageTemplate="5,10,15" >  
-	      <p:ajax event="rowEdit" listener="#{brainstormBean.onEdit}" update=":brainstormForm" />
+	      <p:ajax event="rowEdit" listener="#{brainstormBean.onEdit}" update=":brainstormForm:brainstormList" />
 	      
 	        <f:facet name="header">  
 	            Brainstorms 
@@ -49,7 +49,7 @@
 		            	<h:outputText value="#{brainstorm.date}" />
 		            </f:facet>
 		        	<f:facet name="input">
-		        		<p:inputText value="#{brainstorm.date}" style="width:100%"/>
+		        		<p:calendar value="#{brainstorm.date}" pattern="dd/MM/yyyy HH:mm" />
 		        	</f:facet>
 	        	</p:cellEditor>
 	        </p:column> 

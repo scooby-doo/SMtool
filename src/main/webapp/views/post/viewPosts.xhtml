@@ -15,7 +15,7 @@
 	                 paginator="true" rows="10"  
 	                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
 	                 rowsPerPageTemplate="5,10,15" >  
-	      <p:ajax event="rowEdit" listener="#{postBean.onEdit}" update=":postForm" />
+	      <p:ajax event="rowEdit" listener="#{postBean.onEdit}" update=":postForm:postList" />
 	      
 	        <f:facet name="header">  
 	            Posts 
@@ -27,7 +27,7 @@
 		        		<h:outputText value="#{post.date}" />
 		        	</f:facet>
 		        	<f:facet name="input">
-		        		<p:inputText value="#{post.date}" style="width:100%"/>
+		        		<p:calendar value="#{post.date}" pattern="dd/MM/yyyy HH:mm" />	
 		        	</f:facet>
 		        </p:cellEditor>
 	        </p:column>
@@ -60,7 +60,12 @@
 		            	<h:outputText value="#{post.idCampaign.name}" />
 		            </f:facet>
 		        	<f:facet name="input">
-		        		<p:inputText value="#{post.idCampaign.name}" style="width:100%"/>
+		        		<h:selectOneMenu value="#{post.idCampaign.name}">
+		        			<f:selectItems value="#{campaignBean.campaignList}"
+		        				var="campaign"
+		        				itemLabel="#{campaign.name}"
+		        				itemValue="#{campaign.name}" />		  
+		        		</h:selectOneMenu>		        	
 		        	</f:facet>
 	        	</p:cellEditor>
 	        </p:column> 
@@ -68,6 +73,8 @@
 	        <p:column style="width:5%">  
            		 <p:rowEditor />  
            		 <p:commandButton icon="ui-icon-close" title="remove post" actionListener="#{postBean.removePost(post)}" update="postList" />
+           		 <p:commandButton value="Post" action="#{facebookBean.publishPost(post.content)}">
+           		 </p:commandButton>
         	</p:column> 
   
 	    </p:dataTable> 

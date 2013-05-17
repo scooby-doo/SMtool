@@ -31,6 +31,8 @@
 						<h:form>
 						<p:menu>
 							<p:submenu label="SMtool">
+								<p:menuitem value="Home" 
+									url="/views/Home.jsf"/>
 								<p:menuitem value="Assignments"
 									url="/views/assignment/assignmentHome.jsf" />
 								<p:menuitem value="Brainstorms"
@@ -53,8 +55,8 @@
 									url="/views/responsible/responsibleHome.jsf" />
 								<p:menuitem value="Tasks"
 									url="/views/task/taskHome.jsf" />
-								<p:menuitem value="Users"
-									url="/views/user/userHome.jsf" />
+								<p:menuitem value="Connect Accounts"
+									url="/views/socialNetwork/accountHome.jsf" />
 							</p:submenu>
 						</p:menu>
 						</h:form>
@@ -68,7 +70,7 @@
 			<div id="footer">
 				<ui:insert name="footer">
  						&copy; SMTool, Scooby, 2013. &nbsp; &nbsp;
-    				</ui:insert>
+    			</ui:insert>
 			</div>
 			<ui:remove>
 				<!-- Orice veti adauga la template,

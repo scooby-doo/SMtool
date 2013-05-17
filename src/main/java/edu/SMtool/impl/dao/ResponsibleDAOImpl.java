@@ -21,6 +21,12 @@ public class ResponsibleDAOImpl implements ResponsibleDAO {
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
+	
+	@Override
+	@Transactional
+	public Responsible getDefaultResponsible(){
+		return getResponsibleById(1);
+	}
 
 	@Override
 	@Transactional

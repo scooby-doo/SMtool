@@ -22,6 +22,9 @@ public class ProjectBean implements Serializable {
 	private Project project = new Project();
 	
 	@Autowired
+	private ServiceUtils serviceUtils;
+	
+	@Autowired
 	private ProjectService projectService;
 	
 	@PostConstruct
@@ -31,6 +34,7 @@ public class ProjectBean implements Serializable {
 	
 	public void addNewProject(){
 		Project project = new Project();
+		project.setIdCampaign(serviceUtils.getDefaultCampaign());
 		projectService.addProject(project);
 		projectList.add(project);
 	}
@@ -47,12 +51,7 @@ public class ProjectBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, msg);  
   
 	}
-	
-	public void onCancel(RowEditEvent event) {  
-	    FacesMessage msg = new FacesMessage("Project edit Cancelled",((Project) event.getObject()).getDescription());  
-	    FacesContext.getCurrentInstance().addMessage(null, msg);  
-	}
-	
+
 	public List<Project> getProjectList() {
 		return projectList;
 	}

@@ -10,5 +10,6 @@ public interface CategoryDAO extends Serializable {
 	public void deleteCategory(Category category);
 	public void editCategory(Category category);
 	public Category getCategoryById(int idCategory);
+	public Category getDefaultCategory();
 	public List<Category> getAllCategories();
 }

@@ -15,7 +15,7 @@
 	                 paginator="true" rows="10"  
 	                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
 	                 rowsPerPageTemplate="5,10,15" >  
-	      <p:ajax event="rowEdit" listener="#{responsibleBean.onEdit}" update=":responsibleForm" />
+	      <p:ajax event="rowEdit" listener="#{responsibleBean.onEdit}" update=":responsibleForm:responsibleList" />
 	      
 	        <f:facet name="header">  
 	            Responsibles 

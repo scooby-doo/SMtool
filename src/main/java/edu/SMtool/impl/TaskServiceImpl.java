@@ -16,6 +16,11 @@ public class TaskServiceImpl implements TaskService {
 	
 	@Autowired
 	TaskDAO taskDAO;
+	
+	@Override
+	public Task getDefaultTask(){
+		return taskDAO.getDefaultTask();
+	}
 
 	@Override
 	public void addTask(Task task) {

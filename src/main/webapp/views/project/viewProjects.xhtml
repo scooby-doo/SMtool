@@ -17,7 +17,6 @@
 	                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
 	                 rowsPerPageTemplate="5,10,15" >  
 	      <p:ajax event="rowEdit" listener="#{projectBean.onEdit}" update=":formProject:messages" />
-	  	  <p:ajax event="rowEditCancel" listener="#{projectBean.onCancel}" update=":formProject:messages"/>
 	      
 	        <f:facet name="header">  
 	            Projects
@@ -61,7 +60,12 @@
 		            	<h:outputText value="#{project.idCampaign.name}" />
 		            </f:facet>
 		        	<f:facet name="input">
-		        		<p:inputText value="#{project.idCampaign.name}" style="width:100%"/>
+		        	    <h:selectOneMenu value="#{project.idCampaign.name}">
+		        			<f:selectItems value="#{campaignBean.campaignList}"
+		        				var="campaign"
+		        				itemLabel="#{campaign.name}"
+		        				itemValue="#{campaign.name}" />		  
+		        		</h:selectOneMenu>
 		        	</f:facet>
 	        	</p:cellEditor>
 	        </p:column> 

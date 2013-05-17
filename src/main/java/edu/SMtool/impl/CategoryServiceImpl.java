@@ -4,18 +4,25 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.SMtool.entity.Category;
-import edu.SMtool.interfaces.CategorySerice;
+import edu.SMtool.interfaces.CategoryService;
 import edu.SMtool.interfaces.dao.CategoryDAO;
 
 @Service("categoryService")
-public class CategoryServiceImpl implements CategorySerice {
+public class CategoryServiceImpl implements CategoryService {
 
 	private static final long serialVersionUID = -2929723879934010173L;
 	
 	@Autowired
 	CategoryDAO categoryDAO;
+	
+	@Override
+	@Transactional
+	public Category getDefaultCategory(){
+		return categoryDAO.getDefaultCategory();
+	}
 
 	@Override
 	public void addCategory(Category category) {

@@ -19,7 +19,10 @@ public class EventBean implements Serializable {
 	private List<Event> eventList;
 	
 	@Autowired
-	EventService eventService;
+	private EventService eventService;
+	
+	@Autowired
+	private ServiceUtils serviceUtils;
 	
 	@PostConstruct
 	public void init(){
@@ -33,6 +36,7 @@ public class EventBean implements Serializable {
 	
 	public void addNewEvent(){
 		Event newEvent = new Event();
+		newEvent.setIdCampaign(serviceUtils.getDefaultCampaign());
 		eventService.addEvent(newEvent);
 		eventList.add(newEvent);
 	}

@@ -21,6 +21,12 @@ public class ProjectDAOImpl implements ProjectDAO {
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
+	
+	@Override
+	@Transactional
+	public Project getDefaultProject(){
+		return getProjectById(1);
+	}
 
 	@Override
 	@Transactional

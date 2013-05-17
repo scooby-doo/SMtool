@@ -16,7 +16,12 @@ public class CampaignServiceImpl implements CampaignService {
 	
 	@Autowired
 	CampaignDAO campaignDAO;
-
+	
+	@Override
+	public Campaign getDefaultCampaign(){
+		return campaignDAO.getDefaultCampaign();
+	}
+	
 	@Override
 	public void addCampaign(Campaign campaign) {
 		campaignDAO.addCampaign(campaign);

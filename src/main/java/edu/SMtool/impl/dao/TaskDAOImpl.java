@@ -21,6 +21,12 @@ public class TaskDAOImpl implements TaskDAO {
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
+	
+	@Override
+	@Transactional
+	public Task getDefaultTask(){
+		return getTaskById(1);
+	}
 
 	@Override
 	@Transactional

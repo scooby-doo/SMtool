@@ -19,7 +19,10 @@ public class ResourceBean implements Serializable {
 	private List<Resource> resourceList;
 	
 	@Autowired
-	ResourceService resourceService;
+	private ResourceService resourceService;
+	
+	@Autowired
+	private ServiceUtils serviceUtils;
 	
 	@PostConstruct
 	public void init(){
@@ -33,6 +36,7 @@ public class ResourceBean implements Serializable {
 	
 	public void addNewResource(){
 		Resource newResource = new Resource();
+		newResource.setIdCategory(serviceUtils.getDefaultCategory());
 		resourceService.addResource(newResource);
 		resourceList.add(newResource);
 	}

@@ -10,6 +10,7 @@ public interface CampaignService extends Serializable {
 	public void deleteCampaign(Campaign campaign);
 	public void editCampaign(Campaign campaign);
 	public Campaign getCampaignById(int idCampaign);
+	public Campaign getDefaultCampaign();
 	public List<Campaign> getAllCampaigns();
 
 }

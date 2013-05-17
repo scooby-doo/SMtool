@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.SMtool.entity.Responsible;
 import edu.SMtool.interfaces.ResponsibleService;
@@ -16,6 +17,12 @@ public class ResponsibleServiceImpl implements ResponsibleService {
 	
 	@Autowired
 	ResponsibleDAO responsibleDAO;
+	
+	@Override
+	@Transactional
+	public Responsible getDefaultResponsible(){
+		return responsibleDAO.getDefaultResponsible();
+	}
 
 	@Override
 	public void addResponsible(Responsible responsible) {

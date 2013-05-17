@@ -10,6 +10,7 @@ public interface ProjectService extends Serializable {
 	public void deleteProject(Project project);
 	public void editProject(Project project);
 	public Project getProjectById(int idProject);
+	public Project getDefaultProject();
 	public List<Project> getAllProjects();
 
 }
