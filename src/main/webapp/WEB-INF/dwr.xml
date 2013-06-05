@@ -1,0 +1,14 @@
+<!-- <!DOCTYPE dwr PUBLIC
+    "-//GetAhead Limited//DTD Direct Web Remoting 3.0//EN"
+    "http://directwebremoting.org/schema/dwr30.dtd">
+
+<dwr>
+<allow>
+  <create creator="spring" javascript="facebookBean">
+    <param name="class" value="edu.SMtool.socialNetworks.FacebookBean"/>
+    <param name="location" value="applicationContext.xml" />
+    <include method="setAccessToken"/>
+  </create>
+   <convert converter="bean" match="edu.SMtool.socialNetworks.FacebookBean"/>
+</allow>
+</dwr> -->

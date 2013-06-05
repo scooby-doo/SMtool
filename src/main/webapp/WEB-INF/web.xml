@@ -27,6 +27,10 @@
 	    <param-name>primefaces.THEME</param-name>  
 	    <param-value>redmond</param-value>  
 	</context-param>
+	<context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/applicationContext.xml</param-value>
+</context-param>
 
 	 <listener>
 	<listener-class>
@@ -38,6 +42,57 @@
 		org.springframework.web.context.request.RequestContextListener
 	</listener-class>
   </listener>
+
+
+<servlet>
+  <servlet-name>dwr</servlet-name>
+  <servlet-class>org.directwebremoting.spring.DwrSpringServlet</servlet-class>
+  <init-param>
+    <param-name>debug</param-name>
+    <param-value>true</param-value>
+  </init-param>
+  <!-- Enables <script> remoting -->
+<init-param>
+  <param-name>allowScriptTagRemoting</param-name>
+  <param-value>true</param-value>
+</init-param>
+
+<init-param>
+    <param-name>overridePath</param-name>
+    <param-value>http://smtool.wow.md/dwr/interface</param-value>
+</init-param>
+
+<!-- Disables DWR's CSRF protection -->
+<init-param>
+  <param-name>crossDomainSessionSecurity</param-name>
+  <param-value>false</param-value>
+</init-param>
+
+<!-- Enables GET requests which are necessary for X-domain calls -->
+<init-param>
+  <param-name>allowGetForSafariButMakeForgeryEasier</param-name>
+  <param-value>true</param-value>
+</init-param> 
+
+<init-param>
+    <param-name>absoluteUrlPaths</param-name>
+    <param-value>true</param-value>
+</init-param>
+</servlet>
+
+<servlet-mapping>
+  <servlet-name>dwr</servlet-name>
+  <url-pattern>/dwr/*</url-pattern>
+</servlet-mapping>
+
+
+    
+  
+ 
+ 
+ 
+ 
+ 
 	
 	<!-- JSF Mapping -->
   <servlet>

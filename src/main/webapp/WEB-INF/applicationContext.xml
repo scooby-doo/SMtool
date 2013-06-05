@@ -1,24 +1,23 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:context="http://www.springframework.org/schema/context"
-    xmlns:jee="http://www.springframework.org/schema/jee"
-    xmlns:lang="http://www.springframework.org/schema/lang"
-    xmlns:p="http://www.springframework.org/schema/p"
-    xmlns:tx="http://www.springframework.org/schema/tx"
-    xmlns:mvc="http://www.springframework.org/schema/mvc"
-    xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
         http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
         http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-3.1.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
-        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
- 
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd 
+        http://www.directwebremoting.org/schema/spring-dwr http://www.directwebremoting.org/schema/spring-dwr-3.0.xsd">
+
 	<mvc:annotation-driven />
-	<tx:annotation-driven/>
+	<tx:annotation-driven />
 	<context:annotation-config />
-	
 	<context:component-scan base-package="edu.SMtool.entity" />
 	<context:component-scan base-package="edu.SMtool.impl" />
 	<context:component-scan base-package="edu.SMtool.impl.dao" />
@@ -26,23 +25,40 @@
 	<context:component-scan base-package="edu.SMtool.interfaces" />
 	<context:component-scan base-package="edu.SMtool.socialNetworks" />
 	
-	
-	
-		<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource" >
+     
+    <dwr:annotation-config id="dwrAnnotationConfig" />
+   <dwr:annotation-scan base-package="edu.SMtool.socialNetworks" scanDataTransferObject="true" scanRemoteProxy="false"/>
+   <dwr:annotation-scan base-package="edu.SMtool.entity" scanDataTransferObject="true" scanRemoteProxy="false"/>
+    <dwr:configuration>
+    	<dwr:convert type="bean" class="edu.SMtool.socialNetworks.FacebookBean" />
+  	</dwr:configuration>
+  	
+  	<dwr:controller id="dwrController" debug="true" />
+   <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+     <property name="alwaysUseFullPath" value="true"/>
+     <property name="mappings">
+     <props>
+       <prop key="/dwr/**/*">dwrController</prop>
+     </props>
+     </property>
+   </bean>  
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basename" value="classpath:messages" />
 	</bean>
 
-	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
 		p:location="classpath:jdbc.properties" />
 
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
-		p:driverClassName="${jdbc.driverClassName}"
-		p:url="${jdbc.databaseurl}"
-		p:username="${jdbc.username}"
-		p:password="${jdbc.password}" />
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close" p:driverClassName="${jdbc.driverClassName}"
+		p:url="${jdbc.databaseurl}" p:username="${jdbc.username}" p:password="${jdbc.password}" />
 
-	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" >
-		<property name="dataSource" ref="dataSource"/>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">${jdbc.dialect}</prop>
@@ -50,25 +66,26 @@
 			</props>
 		</property>
 		<property name="annotatedClasses">
-		<list>
-			<value>edu.SMtool.entity.Assignment</value>
-			<value>edu.SMtool.entity.Brainstorm</value>
-			<value>edu.SMtool.entity.Campaign</value>
-			<value>edu.SMtool.entity.Category</value>
-			<value>edu.SMtool.entity.Event</value>
-			<value>edu.SMtool.entity.Goal</value>
-			<value>edu.SMtool.entity.Post</value>
-			<value>edu.SMtool.entity.Project</value>
-			<value>edu.SMtool.entity.Resource</value>
-			<value>edu.SMtool.entity.Responsible</value>
-			<value>edu.SMtool.entity.Task</value>
-			<value>edu.SMtool.entity.User</value>
-		</list>
-	    </property>
+			<list>
+				<value>edu.SMtool.entity.Assignment</value>
+				<value>edu.SMtool.entity.Brainstorm</value>
+				<value>edu.SMtool.entity.Campaign</value>
+				<value>edu.SMtool.entity.Category</value>
+				<value>edu.SMtool.entity.Event</value>
+				<value>edu.SMtool.entity.Goal</value>
+				<value>edu.SMtool.entity.Post</value>
+				<value>edu.SMtool.entity.Project</value>
+				<value>edu.SMtool.entity.Resource</value>
+				<value>edu.SMtool.entity.Responsible</value>
+				<value>edu.SMtool.entity.Task</value>
+				<value>edu.SMtool.entity.User</value>
+			</list>
+		</property>
 	</bean>
 
-	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
- 
+
 </beans>

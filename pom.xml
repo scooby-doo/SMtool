@@ -7,6 +7,12 @@
 	<name>SMtool</name>
 	<description>Social Media Management Tool</description>
 	<packaging>war</packaging>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<sonar.language>java</sonar.language>
+	</properties>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -25,6 +31,13 @@
 					<webXml>src\main\webapp\WEB-INF\web.xml</webXml>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>2.0</version>
+			</plugin>
+
 		</plugins>
 	</build>
 	<repositories>
@@ -33,9 +46,55 @@
 			<name>Prime Repo</name>
 			<url>http://repository.primefaces.org</url>
 		</repository>
+
+		<repository>
+			<!-- Please consider setting up your own on-site repository proxy such 
+				as with Nexus and pointing the url element below at that instead - -->
+			<id>oss-sonatype-snapshots</id>
+			<name>OSS Sonatype Snapshots Repository</name>
+			<url>http://oss.sonatype.org/content/repositories/snapshots</url>
+
+		</repository>
 	</repositories>
 	<dependencies>
-	
+		<dependency>
+			<groupId>org.directwebremoting</groupId>
+			<artifactId>dwr</artifactId>
+			<version>3.0.0-rc3-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<!-- Optional non-CLA components see DWR documentation for details -->
+			<groupId>org.directwebremoting</groupId>
+			<artifactId>dwr</artifactId>
+			<classifier>noncla</classifier>
+			<version>3.0.0-rc3-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-core</artifactId>
+			<version>1.0.2.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-facebook</artifactId>
+			<version>1.0.2.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-web</artifactId>
+			<version>1.0.2.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib-nodep</artifactId>
+			<version>2.2</version>
+		</dependency>
+
 		<dependency>
 			<groupId>com.restfb</groupId>
 			<artifactId>restfb</artifactId>
