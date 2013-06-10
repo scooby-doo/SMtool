@@ -73,13 +73,23 @@
 	        <p:column style="width:5%">  
            		 <p:rowEditor />  
            		 <p:commandButton icon="ui-icon-close" title="remove post" actionListener="#{postBean.removePost(post)}" update="postList" />
-           		 <p:commandButton value="Post" action="#{facebookBean.publishPost(post.content)}">
-           		 </p:commandButton>
+           		 <p:commandButton value="Post" onclick="choosePages.show()" action="#{facebookBean.selectPost(post.id)}" />
+           		 <p:commandButton value = "twitter post" action = "#{twitterBean.postTweet(post.content)}" />
         	</p:column> 
-  
 	    </p:dataTable> 
-		<p:commandButton value="Add" update="postList" action="#{postBean.addNewPost()}" process="@this" /> 
-         
+	 	<p:commandButton value="Add" update="postList" action="#{postBean.addNewPost()}" process="@this" /> 	
+		<p:confirmDialog widgetVar="choosePages">
+		<p:dataTable var="page" value="#{facebookBean.pages}" >
+			<p:column>
+				#{page.name}
+			</p:column>
+			<p:column>
+				<h:commandButton value="Post" action="#{facebookBean.postOnPage(page.name)}" oncomplete="edit.hide()" />
+			</p:column>
+		</p:dataTable>
+
+		 <h:commandButton value="Cancel" onclick="edit.hide()"/>
+		 </p:confirmDialog>
    </h:form>
 </h:body>
 </html>

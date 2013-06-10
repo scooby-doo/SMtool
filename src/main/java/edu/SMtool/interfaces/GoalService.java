@@ -11,5 +11,6 @@ public interface GoalService extends Serializable {
 	public void editGoal(Goal goal);
 	public Goal getGoalById(int idGoal);
 	public List<Goal> getAllGoals();
-
+	public List<Goal> getCampaignGoalsById(int idCampaing);
+	public List<Goal> getProjectGoalsById(int idProject);
 }

@@ -1,0 +1,67 @@
+<!DOCTYPE html
+          PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:fb="http://ogp.me/ns/fb#"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Insert title here</title>
+</h:head>
+<h:body>
+	<h:form id="form">
+		<p:tabView id="tabView">
+			<p:tab title="Details">
+				<h:outputText value="#{campaignBean.campaign.name}" />
+				<p:dataTable var="goal" value="#{campaignBean.goalList}"
+					id="goalList" paginator="true" rows="10">
+					<f:facet name="header">  
+		           		 Goals 
+		        	</f:facet>
+					<p:column headerText="Description" style="width:32%">
+						<h:outputText value="#{goal.description}" />
+					</p:column>
+					<p:column headerText="Status" style="width:32%">
+						<h:outputText value="#{goal.status}" />
+					</p:column>
+					<p:column headerText="Comments" style="width:31%">
+						<h:outputText value="#{goal.comments}" />
+					</p:column>
+				</p:dataTable>
+			</p:tab>
+
+			<p:tab title="Events">
+				<p:dataTable var="event" value="#{campaignBean.eventList}"
+					paginator="true" rows="10">
+					<f:facet name="header">  
+	           			 Events
+	        		</f:facet>
+					<p:column headerText="Name" style="width:25%">
+						<h:outputText value="#{event.name}" />
+					</p:column>
+					<p:column headerText="Description" style="width:25%">
+						<h:outputText value="#{event.description}" />
+					</p:column>
+					<p:column headerText="Start Date" style="width:25%">
+						<h:outputText value="#{event.startDate}">
+							<f:convertDateTime pattern="dd.MM.yyyy" />
+						</h:outputText>
+					</p:column>
+					<p:column headerText="End Date" style="width:20%">
+						<h:outputText value="#{event.endDate}">
+							<f:convertDateTime pattern="dd.MM.yyyy" />
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Location" style="width:15%">
+
+						<h:outputText value="#{event.location}" />
+					</p:column>
+				</p:dataTable>
+			</p:tab>
+		</p:tabView>
+	</h:form>
+</h:body>
+</html>

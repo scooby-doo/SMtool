@@ -16,6 +16,11 @@ public class EventServiceImpl implements EventService {
 	
 	@Autowired
 	EventDAO eventDAO;
+	
+	@Override
+	public List<Event> getEventByCampaignId(int idCampaign){
+		return eventDAO.getEventByCampaignId(idCampaign);
+	}
 
 	@Override
 	public void addEvent(Event event) {

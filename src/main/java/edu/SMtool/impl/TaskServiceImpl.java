@@ -18,6 +18,11 @@ public class TaskServiceImpl implements TaskService {
 	TaskDAO taskDAO;
 	
 	@Override
+	public List<Task> getTaskByProjectId(int idProject){
+		return taskDAO.getTaskByProjectId(idProject);
+	}
+	
+	@Override
 	public Task getDefaultTask(){
 		return taskDAO.getDefaultTask();
 	}

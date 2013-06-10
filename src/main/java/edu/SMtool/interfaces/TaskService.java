@@ -12,5 +12,5 @@ public interface TaskService extends Serializable {
 	public Task getTaskById(int idTask);
 	public Task getDefaultTask();
 	public List<Task> getAllTasks();
-
+	public List<Task> getTaskByProjectId(int idProject);
 }

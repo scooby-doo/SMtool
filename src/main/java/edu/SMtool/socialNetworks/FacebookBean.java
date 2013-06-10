@@ -7,12 +7,19 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
 
 import org.directwebremoting.annotations.RemoteMethod;
 import org.directwebremoting.annotations.RemoteProxy;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.social.facebook.api.PageOperations;
 import org.springframework.stereotype.Component;
 
+import com.restfb.Connection;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.FacebookClient.AccessToken;
@@ -22,6 +29,9 @@ import com.restfb.types.Page;
 
 import edu.SMtool.entity.Event;
 import edu.SMtool.entity.FacebookObject;
+import edu.SMtool.entity.Post;
+import edu.SMtool.interfaces.EventService;
+import edu.SMtool.interfaces.PostService;
 
 @Component
 @RemoteProxy(name="facebookBean")
@@ -30,10 +40,15 @@ public class FacebookBean implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -7850775153972751371L;
-	//private static final String MY_ACCESS_TOKEN = "CAACEdEose0cBAHc29SNRi0Tx6ZBt45q2CnNmZAJ9KX2eNN7NVdLG7ZBmBCBGIaXriPRV4RmYvN98ykAJF9hrDeZAVMqEO14EmoTTwExkbbu7touiXLIQVjokIgpZCTb6UdTPp5kNlYDm1vZA2ZB5j5DrC2SnSpdxsrKMgcgi9cr1wZDZD";
-			
 	
+	@Autowired
+	private PostService postService;
+	
+	@Autowired
+	private EventService eventService;
+	
+	private static final long serialVersionUID = -7850775153972751371L;
+	private static final String MY_ACCESS_TOKEN = "CAACEdEose0cBAMmhZC51EPtMgvaAYjZAChIj1TJEoBZCJCICWbq8SLiLRiVJ2aW08Pn7gXzTdkNhy4vfE7EZBLhhPTOcRFwBHspQGcLKE4OaJsZCp8RiMPMtEBUVYZCPjX2MBrzgWZAEjP2JAFMVZADHTZCvSov79fIPgZAWAyKApBbAZDZD";
 	private static final String APP_ID = "377737765678750";
 	private static final String APP_SECRET = "79f359aff8466938a83e2805ca06816f";
 	private FacebookClient facebookClient;
@@ -42,17 +57,29 @@ public class FacebookBean implements Serializable{
 	private FacebookObject facebookObject;
 	
 	private String accessToken;
-	
-	private String pageName;
 	private String info = "default";
-	private String post;
+	private List<Page> pages = new ArrayList<Page>();
+	private Post post;
+	private String pageName;
+	private Event event = new Event();
 	
-	//private AccessToken accessTOKEN = new DefaultFacebookClient().obtainExtendedAccessToken(APP_ID, APP_SECRET);
-	
-	
+
+	public Event getEvent() {
+		return event;
+	}
+
+	public void setEvent(Event event) {
+		this.event = event;
+	}
+
 	public String getAccessToken() {
 		return accessToken;
 	}
+	
+	/*@PostConstruct
+	public void init(){
+		getUserPages();
+	}*/
 	
 	@RemoteMethod
 	public void processData(String accessToken){
@@ -66,29 +93,98 @@ public class FacebookBean implements Serializable{
 		this.accessToken = accessToken;
 	}
 
-	/*
-	public ConnectionFactoryLocator connectionFactoryLocator(){
-		ConnectionFactoryRegistry registry = new ConnectionFactoryRegistry();
-		registry.addConnectionFactory(new FacebookConnectionFactory(APP_ID, APP_SECRET));
-		return registry;
+	public void getUserPages(){
+		facebookClient = new DefaultFacebookClient(MY_ACCESS_TOKEN);
+		Connection<Page> myPages = facebookClient.fetchConnection("me/accounts", Page.class);
+		for(List<Page> myPage: myPages) {
+			for(Page page : myPage){
+				pages.add(page);
+			}
+		}
 	}
-	*/
 	
-	public void getPageInfo(){
+	public void selectPost(String id){
+		post = postService.getPostById(Integer.parseInt(id));
+		setPost(post);
+	}
+	
+	public void postOnPage(String pageReceived){
+		System.out.println("post is");
+		System.out.println(getPost().getContent());
+		facebookClient = new DefaultFacebookClient(MY_ACCESS_TOKEN);
+		Connection<Page> myPages = facebookClient.fetchConnection("me/accounts", Page.class);
+		
+		
+		
+		for(List<Page> myPage: myPages) {
+			for(Page page : myPage){
+				if (pageReceived.equals(page.getName())) {
+					String pageId = page.getId();
+					FacebookClient facebookPageClient = new DefaultFacebookClient(page.getAccessToken());
+					facebookPageClient.publish(pageId+"/feed", FacebookType.class, 
+							Parameter.with("message", getPost().getContent()),
+							Parameter.with("link", getPost().getLink())			
+							);
+				}
+			}
+		}
+	}
+	
+	public void selectEvent(String id){
+		System.out.println("id event "+id);
+		event = eventService.getEventById(Integer.parseInt(id));
+		System.out.println("event is ");
+		System.out.println(event.getDescription());
+		setEvent(event);
+	}
+	
+	public void eventOnPage(String pageName){
+		System.out.println(getEvent().getName());
+		System.out.println(getEvent().getStartDate());
+		System.out.println(getEvent().getEndDate());
+		System.out.println("page name"+pageName);
+		facebookClient = new DefaultFacebookClient(MY_ACCESS_TOKEN);
+		Connection<Page> myPages = facebookClient.fetchConnection("me/accounts", Page.class);
+		for(List<Page> myPage: myPages) {
+			for(Page page : myPage){
+				if (pageName.equals(page.getName())) {
+					String pageId = page.getId();
+					FacebookClient facebookPageClient = new DefaultFacebookClient(page.getAccessToken());
+					facebookPageClient.publish(pageId+"/events", FacebookType.class,
+							  Parameter.with("name", getEvent().getName()), 
+							  Parameter.with("start_time", getEvent().getStartDate()),
+							  Parameter.with("end_time", getEvent().getEndDate())						  
+							);
+							
+				}
+			}
+		}
+		
+		
+		
+	}
+	
+	/*public void getPageInfo(){
 		AccessToken accessTOKEN = new DefaultFacebookClient().obtainExtendedAccessToken(APP_ID, APP_SECRET);
 		facebookClient = new DefaultFacebookClient(accessTOKEN.getAccessToken());
 		Page page = facebookClient.fetchObject(pageName, Page.class);
 		System.out.println("Page likes: " + page.getLikes());
 		setInfo("Page about: "+ page.getAbout());
 	}
-	
-	public void publishPost(String post1){
-		String tokenviafunction = autoritzacion();
+	*/
+	/*public void publishPost(String post1){
+		//String tokenviafunction = autoritzacion();
 		System.out.println("token via function");
-		System.out.println(tokenviafunction);
+		
 		//AccessToken accessTOKEN = new DefaultFacebookClient().obtainExtendedAccessToken(APP_ID, APP_SECRET);
 		///String access_token = accessTOKEN.getAccessToken();
-		facebookClient = new DefaultFacebookClient(tokenviafunction);
+		facebookClient = new DefaultFacebookClient(MY_ACCESS_TOKEN);
+		Connection<Page> myPages = facebookClient.fetchConnection("me/pages", Page.class);
+		for(List<Page> myPage: myPages) {
+			for(Page page : myPage){
+				System.out.println("Page " + page);
+			}
+		}
 		FacebookType publishMessage = facebookClient.publish("me/feed", FacebookType.class, Parameter.with("message", post1));
 		System.out.println("published message ID: " + publishMessage.getId());
 	}
@@ -158,12 +254,12 @@ public class FacebookBean implements Serializable{
 	    return accessToken;
 	}
 	
+	*/
 	
 	
 	
-	
-	public void getPages(){
-		
+	public List<Page> getPages(){
+		return pages;
 	}
 
 
@@ -186,11 +282,11 @@ public class FacebookBean implements Serializable{
 		this.info = info;
 	}
 
-	public String getPost() {
+	public Post getPost() {
 		return post;
 	}
 
-	public void setPost(String post) {
+	public void setPost(Post post) {
 		this.post = post;
 	}
 	

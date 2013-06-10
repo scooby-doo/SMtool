@@ -18,6 +18,11 @@ public class CampaignServiceImpl implements CampaignService {
 	CampaignDAO campaignDAO;
 	
 	@Override
+	public List<Campaign> getCampaignsByProjectId(int idProject){
+		return campaignDAO.getCampaignsByProjectId(idProject);
+	}
+	
+	@Override
 	public Campaign getDefaultCampaign(){
 		return campaignDAO.getDefaultCampaign();
 	}

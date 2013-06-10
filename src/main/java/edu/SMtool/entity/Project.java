@@ -28,10 +28,6 @@ public class Project implements Serializable {
 	
 	@Column(name = "description")
 	private String description;
-
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "idCampaign")
-	private Campaign idCampaign;
 	
 	@Column(name = "coments")
 	private String comments;
@@ -44,7 +40,6 @@ public class Project implements Serializable {
 		this.id = id;
 	}
 	
-	
 	public String getName() {
 		return name;
 	}
@@ -52,22 +47,12 @@ public class Project implements Serializable {
 		this.name = name;
 	}
 	
-	
 	public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-
-	public Campaign getIdCampaign() {
-		return idCampaign;
-	}
-	public void setIdCampaign(Campaign idCampaign) {
-		this.idCampaign = idCampaign;
-	}
-	
 	
 	public String getComments() {
 		return comments;

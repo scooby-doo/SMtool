@@ -1,8 +1,10 @@
 package edu.SMtool.impl.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +23,16 @@ public class EventDAOImpl implements EventDAO {
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
+	
+	@Override
+	@Transactional
+	public List<Event> getEventByCampaignId(int idCampaign){
+		@SuppressWarnings("unchecked")
+		List<Event> eventList = sessionFactory.getCurrentSession().createCriteria(Event.class)
+				.add(Restrictions.eq("idCampaign.id", idCampaign)).list();
+		if(eventList == null) {eventList = new ArrayList<Event>(); } 
+		return eventList;
+	}
 
 	@Override
 	@Transactional
@@ -37,7 +49,7 @@ public class EventDAOImpl implements EventDAO {
 	@Override
 	@Transactional
 	public void editEvent(Event event) {
-		sessionFactory.getCurrentSession().delete(event);
+		sessionFactory.getCurrentSession().update(event);
 	}
 
 	@Override

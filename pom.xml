@@ -55,13 +55,33 @@
 			<url>http://oss.sonatype.org/content/repositories/snapshots</url>
 
 		</repository>
+		
+		   <repository>
+         <id>twitter4j.org</id>
+         <name>twitter4j.org Repository</name>
+         <url>http://twitter4j.org/maven2</url>
+         <releases>
+            <enabled>true</enabled>
+         </releases>
+         <snapshots>
+            <enabled>true</enabled>
+         </snapshots>
+      </repository>
 	</repositories>
+	
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.directwebremoting</groupId>
 			<artifactId>dwr</artifactId>
 			<version>3.0.0-rc3-SNAPSHOT</version>
 		</dependency>
+		
+		  <dependency>
+         <groupId>org.twitter4j</groupId>
+         <artifactId>twitter4j-core</artifactId>
+         <version>[3.0,)</version>
+      </dependency>
 
 		<dependency>
 			<!-- Optional non-CLA components see DWR documentation for details -->

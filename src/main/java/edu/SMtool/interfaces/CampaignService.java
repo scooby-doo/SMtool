@@ -12,5 +12,6 @@ public interface CampaignService extends Serializable {
 	public Campaign getCampaignById(int idCampaign);
 	public Campaign getDefaultCampaign();
 	public List<Campaign> getAllCampaigns();
+	public List<Campaign> getCampaignsByProjectId(int idProject);
 
 }

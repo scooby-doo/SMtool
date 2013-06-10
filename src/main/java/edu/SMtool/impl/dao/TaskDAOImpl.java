@@ -1,8 +1,10 @@
 package edu.SMtool.impl.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +22,16 @@ public class TaskDAOImpl implements TaskDAO {
 
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
+	}
+	
+	@Override
+	@Transactional
+	public List<Task> getTaskByProjectId(int idProject){
+		@SuppressWarnings("unchecked")
+		List<Task> taskList = sessionFactory.getCurrentSession().createCriteria(Task.class)
+				.add(Restrictions.eq("idProject.id",idProject)).list();
+		if(taskList == null) { taskList = new ArrayList<Task>(); }
+		return taskList;
 	}
 	
 	@Override

@@ -1,8 +1,10 @@
 package edu.SMtool.impl.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +22,16 @@ public class CampaignDAOImpl implements CampaignDAO {
 
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
+	}
+	
+	@Override
+	@Transactional
+	public List<Campaign> getCampaignsByProjectId(int idProject){
+		@SuppressWarnings("unchecked")
+		List<Campaign> campaignList = sessionFactory.getCurrentSession().createCriteria(Campaign.class)
+				.add(Restrictions.eq("idProject.id",idProject)).list();
+		if(campaignList == null) {campaignList = new ArrayList<Campaign>(); } 
+		return campaignList;
 	}
 	
 	@Override

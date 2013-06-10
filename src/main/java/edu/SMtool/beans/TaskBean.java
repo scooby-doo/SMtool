@@ -19,6 +19,9 @@ public class TaskBean implements Serializable {
 	private List<Task> taskList;
 	
 	@Autowired
+	private ServiceUtils serviceUtils;
+	
+	@Autowired
 	TaskService taskService;
 	
 	@PostConstruct
@@ -33,6 +36,8 @@ public class TaskBean implements Serializable {
 	
 	public void addNewTask(){
 		Task newValue = new Task();
+		newValue.setIdProject(serviceUtils.getDefaultProject());
+		newValue.setIdResp(serviceUtils.getDefaultResponsible());
 		taskService.addTask(newValue);
 		taskList.add(newValue);
 	}

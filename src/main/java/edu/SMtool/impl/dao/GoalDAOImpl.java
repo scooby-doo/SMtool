@@ -1,8 +1,10 @@
 package edu.SMtool.impl.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +24,31 @@ public class GoalDAOImpl implements GoalDAO {
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
+	
+	@Override
+	@Transactional
+	public List<Goal> getCampaignGoalsById(int idCampaing){
+		@SuppressWarnings("unchecked")
+		List<Goal> goalList = sessionFactory.getCurrentSession().createCriteria(Goal.class)
+				.add(Restrictions.eq("identifier",1))
+				.add(Restrictions.eq("idRefered", idCampaing))
+				.list();
+		if(goalList == null) { goalList = new ArrayList<Goal>();}
+		return goalList;
+	}
+	
+	@Override
+	@Transactional
+	public List<Goal> getProjectGoalsById(int idProject){
+		@SuppressWarnings("unchecked")
+		List<Goal> goalList = sessionFactory.getCurrentSession().createCriteria(Goal.class)
+				.add(Restrictions.eq("identifier",2))
+				.add(Restrictions.eq("idRefered", idProject))
+				.list();
+		if(goalList == null) { goalList = new ArrayList<Goal>();}
+		return goalList;
+	}
+	
 
 	@Override
 	@Transactional

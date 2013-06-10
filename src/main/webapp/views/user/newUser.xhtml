@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:form="http://www.springframework.org/tags/form">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Insert title here</title>
+</h:head>
+<h:body>
+	<h:form id="userForm">
+		<p:panel id="panel" header="Register">
+			<p:focus context="panel" />
+			<p:messages id="messages" showDetail="true" autoUpdate="true"/>
+			<h:panelGrid columns="3">
+				 
+				<h:outputLabel for="firstname" value="First Name: *" />
+				<p:inputText id="firstname" required="true" label="firstname" value="#{userBean.user.firstName}"/>
+				<font color="red"><form:errors path="firstname"/></font>
+								
+				<h:outputLabel for="lastname" value="Last Name: *" />
+				<p:inputText id="lastname" required="true" label="lastname"
+					value="#{userBean.user.lastName}">
+				</p:inputText>
+				<font color="red"><form:errors path="lastname"/></font>
+				
+				<h:outputLabel for="username" value="User Name: *" />
+				<p:inputText id="username" required="true" label="username"
+					value="#{userBean.user.userName}">
+				</p:inputText>
+				<font color="red"><form:errors path="username"/></font>
+				
+				<h:outputLabel for="email" value="Email: *" />
+				<p:inputText id="email" required="true" label="email" value="#{userBean.user.email}" />
+				<font color="red"><form:errors path="email"/></font>
+				<h:outputLabel for="password1" value="Password: *" />
+				
+				<p:password id="pwd1" value="#{userBean.user.password}" match="pwd2" label="pwd1" feedback="true" />
+				<font color="red"><form:errors path="password"/></font>
+				
+				<h:outputLabel for="pwd2" value="Confirm Password: *"/>
+				<p:password id="pwd2" value="#{userBean.user.password}" label="pwd2" feedback="true" />
+			</h:panelGrid>
+			<p:commandButton value="Add" update="panel"	action="#{userBean.addNewUser()}" />
+		</p:panel>
+	</h:form>
+</h:body>
+</html>

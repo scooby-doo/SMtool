@@ -7,12 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import org.hibernate.criterion.Restrictions;
+
 import edu.SMtool.entity.User;
 import edu.SMtool.interfaces.dao.UserDAO;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
 
+	private Integer lockObject = new Integer(1);
 	private static final long serialVersionUID = -6068803922224973575L;
 	
 	@Autowired
@@ -22,10 +25,27 @@ public class UserDAOImpl implements UserDAO {
 		this.sessionFactory = sessionFactory;
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	@Transactional
 	public void addUser(User user) {
-		sessionFactory.getCurrentSession().saveOrUpdate(user);
+		synchronized (lockObject) {
+			@SuppressWarnings("unchecked")
+			List<User> users = sessionFactory.getCurrentSession().createCriteria(User.class)
+					.add(Restrictions.eq("email",user.getEmail())).list();
+			if (users != null || !users.isEmpty()) {
+				System.out.println("this mail already exists");
+			}
+			else {
+				sessionFactory.getCurrentSession().saveOrUpdate(user);
+			}
+		}
+		
+	}
+	
+	@Transactional
+	public void getUserbyMail(String mail){
+		
 	}
 
 	@Override

@@ -29,6 +29,12 @@ public class Goal implements Serializable {
 	@Column(name = "coments")
 	private String comments;
 	
+	@Column(name="identifier")
+	private int identifier;
+	
+	@Column(name="idRefered")
+	private int idRefered;
+	
 
 	public int getId() {
 		return id;

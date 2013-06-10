@@ -8,9 +8,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
+import javax.persistence.UniqueConstraint;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "Users", uniqueConstraints = {
+		@UniqueConstraint(columnNames="email"),
+		@UniqueConstraint(columnNames="username")})
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1539254004434512493L;
@@ -20,24 +27,27 @@ public class User implements Serializable {
 	@Column(name  = "idUser")
 	private int id;
 	
+	@NotEmpty(message="first name is empty")
 	@Column(name = "firstName")
 	private String firstName;
 	
+	@NotEmpty(message="last name is missing")
 	@Column(name = "lastName")
 	private String lastName;
 	
-	@Column(name = "userName")
+	@NotEmpty
+	@Column(name = "userName", unique=true)
 	private String userName;
 	
+	@NotEmpty
+	@Pattern(message="password must contain at least: one digit, one lower case character, one upper case character and one special @#$%. Password length must be between 6 and 20 characters", regexp="((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})")
 	@Column(name = "ppassword")
 	private String password;
 	
-	@Column(name = "email")
+	
+	@Email
+	@Column(name = "email", unique=true)
 	private String email;
-	
-	@Column(name = "birthday")
-	private String birthday;
-	
 
 	public int getId() {
 		return id;
@@ -85,15 +95,4 @@ public class User implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
-	public String getBirthday() {
-		return birthday;
 	}
-	public void setBirthday(String birthday) {
-		this.birthday = birthday;
-	}
-	
-	
-
-}

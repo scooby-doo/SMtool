@@ -18,6 +18,16 @@ public class GoalServiceImpl implements GoalService {
 	private GoalDAO goalDAO;
 	
 	@Override
+	public List<Goal> getCampaignGoalsById(int idCampaing){
+		return goalDAO.getCampaignGoalsById(idCampaing);
+	}
+	
+	@Override
+	public List<Goal> getProjectGoalsById(int idProject){
+		return goalDAO.getProjectGoalsById(idProject);
+	}
+	
+	@Override
 	public void addGoal(Goal goal) {
 		goalDAO.addGoal(goal);
 	}

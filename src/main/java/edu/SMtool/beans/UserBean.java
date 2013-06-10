@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.validation.Valid;
 
 import org.primefaces.event.RowEditEvent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ public class UserBean implements Serializable {
 
 	private static final long serialVersionUID = 6037630908378830296L;
 	private List<User> userList;
+
+	private User user = new User();
 	
 	@Autowired
 	UserService userService;
@@ -32,9 +35,8 @@ public class UserBean implements Serializable {
 	}
 	
 	public void addNewUser(){
-		User newUser = new User();
-		userService.addUser(newUser);
-		userList.add(newUser);
+		userService.addUser(this.user);
+		user = new User();
 	}
 	
 	public void removeUser(User user){
@@ -49,5 +51,15 @@ public class UserBean implements Serializable {
 	public void setUserList(List<User> userList) {
 		this.userList = userList;
 	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	
 
 }

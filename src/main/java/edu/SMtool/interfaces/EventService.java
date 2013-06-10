@@ -12,4 +12,5 @@ public interface EventService extends Serializable {
 	public void editEvent(Event event);
 	public Event getEventById(int idEvent);
 	public List<Event> getAllEvents();
+	public List<Event> getEventByCampaignId(int idCampaign);
 }

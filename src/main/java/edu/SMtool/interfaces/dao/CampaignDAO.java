@@ -12,5 +12,6 @@ public interface CampaignDAO extends Serializable {
 	public void editCampaign(Campaign campaign);
 	public Campaign getCampaignById(int idCampaign);
 	public List<Campaign> getAllCampaigns();
+	public List<Campaign> getCampaignsByProjectId(int idProject);
 
 }

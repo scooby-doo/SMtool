@@ -5,9 +5,13 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -32,6 +36,11 @@ public class Campaign implements Serializable {
 	
 	@Column(name = "endDate")
 	private Date endDate;
+	
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "idProject")
+	private Project idProject;
 
 	public int getId() {
 		return id;
@@ -64,6 +73,12 @@ public class Campaign implements Serializable {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public Project getIdProject() {
+		return idProject;
+	}
+	public void setIdProject(Project idProject) {
+		this.idProject = idProject;
 	}
 	
 	
